@@ -10,8 +10,8 @@ function info() {
       alert("Please, Enter valid name");
     } else if (schoolName == "" || schoolName.length < 2) {
       alert("Please, Enter valid school name");
-    } else if (grade == "") {
-      alert("Please, Enter Grade");
+    } else if (grade == "" || grade < 0) {
+      alert("Please, Enter valid grade");
     } else if (city == "" || city.length < 2) {
       alert("Please, Enter valid city name");
     } else {
