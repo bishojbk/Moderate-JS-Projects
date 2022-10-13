@@ -14,6 +14,8 @@
         <form action="#">
           <div class="input-field">Name:</div>
           <input type="text" placeholder="EJR" class="input" id="name" />
+          <div id="name-error"></div>
+          <br />
           <div class="input-field">School Name:</div>
           <input
             type="text"
@@ -22,29 +24,36 @@
             placeholder="G.S. Niketan"
             class="input"
           />
+          <div id="school-error"></div>
+          <br />
           <div class="input-field">Grade:</div>
           <input type="number" placeholder="0" class="input" id="grade" />
+          <div id="grade-error"></div>
+          <br />
           <div class="input-field">City:</div>
           <input type="text" placeholder="Hetauda" class="input" id="city" />
+          <div id="city-error"></div>
+          <br />
 
           <button class="button" onclick="onAdd()">Submit</button>
         </form>
       </div>
-    </section>
-    <section class="table-content">
-      <div class="table-fill">
-        <header>Table:</header>
-        <table>
-          <tr>
-            <th>Name:</th>
-            <th>School Name:</th>
-            <th>Grade:</th>
-            <th class="city">City:</th>
-            <th>Modify</th>
-          </tr>
-        </table>
-        <tbody></tbody>
-      </div>
+
+      <section class="table-content">
+        <div class="table-fill">
+          <header>Table:</header>
+          <table>
+            <tr>
+              <th>Name:</th>
+              <th>School Name:</th>
+              <th>Grade:</th>
+              <th class="city">City:</th>
+              <th>Modify</th>
+            </tr>
+          </table>
+          <tbody></tbody>
+        </div>
+      </section>
     </section>
   </body>
   <script src="script.js"></script>
