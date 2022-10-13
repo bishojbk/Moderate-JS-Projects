@@ -6,34 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript Forms</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <section class="container forms">
       <div class="form">
         <header>JavaScript Forms</header>
         <form action="#">
-          <div class="input-field">Name:</div>
-          <input type="text" placeholder="EJR" class="input" id="name" />
-          <div id="name-error"></div>
-          <br />
+          <div class>Name:</div>
+          <div class="form-control">
+            <input type="text" placeholder="EJR" class="input" id="name" />
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
+            <small>Error message</small>
+          </div>
+
           <div class="input-field">School Name:</div>
-          <input
-            type="text"
-            name=""
-            id="school-name"
-            placeholder="G.S. Niketan"
-            class="input"
-          />
-          <div id="school-error"></div>
-          <br />
+          <div class="form-control error">
+            <input
+              type="text"
+              name=""
+              id="school-name"
+              placeholder="G.S. Niketan"
+              class="input"
+            />
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
+            <small>Error message</small>
+          </div>
+
           <div class="input-field">Grade:</div>
-          <input type="number" placeholder="0" class="input" id="grade" />
-          <div id="grade-error"></div>
-          <br />
+          <div class="form-control success">
+            <input type="number" placeholder="0" class="input" id="grade" />
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
+            <small>Error message</small>
+          </div>
+
           <div class="input-field">City:</div>
-          <input type="text" placeholder="Hetauda" class="input" id="city" />
-          <div id="city-error"></div>
-          <br />
+          <div class="form-control">
+            <input type="text" placeholder="Hetauda" class="input" id="city" />
+            <i class="fa fa-check-circle"></i>
+            <i class="fa fa-exclamation-circle"></i>
+            <small>Error message</small>
+          </div>
 
           <button class="button" onclick="onAdd()">Submit</button>
         </form>

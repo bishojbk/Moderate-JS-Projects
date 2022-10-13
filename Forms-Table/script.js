@@ -6,48 +6,45 @@ function onAdd(e) {
 
   e.preventDefault();
 
-  let names = document.getElementById("name").value,
-    grade = document.getElementById("grade").value,
-    city = document.getElementById("city").value,
-    schoolName = document.getElementById("school-name").value;
+  let names = document.getElementById("name").value.trim(),
+    grade = document.getElementById("grade").value.trim(),
+    city = document.getElementById("city").value.trim(),
+    schoolName = document.getElementById("school-name").value.trim();
+  let small = document.querySelector("small");
+  console.log(small);
+  console.log(names);
+  const formStyle = document.querySelector("form-control");
+  console.log(formStyle);
 
-  const nameValidate = form.elements.namedItem("name");
-  const schoolNameValidate = form.elements.namedItem("school-name");
-  const gradeValidate = form.elements.namedItem("grade");
-  const cityValidate = form.elements.namedItem("city");
+  function setErrorFor(input, message) {
+    small.innerText = message;
+    formStyle.classList.add("form-control.success input");
+  }
 
-  nameValidate.addEventListener("input", validate);
-  schoolNameValidate.addEventListener("input", validate);
-  gradeValidate.addEventListener("input", validate);
-  cityValidate.addEventListener("input", validate);
+  if (names == "" || names.length < 2) {
+    setErrorFor(names, "Names should be greater than 2 characters");
+  } else {
+    setSuccessFor(names), update(names);
+  }
 
-  nameError = document.getElementById("name-error");
-  schoolError = document.getElementById("school-error");
-  gradeError = document.getElementById("grade-error");
-  cityError = document.getElementById("city-error");
+  if (schoolName == "" || schoolName.length < 2) {
+    setErrorFor(schoolName, "School name should be greater than 2 alphabets");
+  } else {
+    setSuccessFor(schoolName), update(schoolName);
+  }
+  if (grade == "" || grade < 0 || grade > 10) {
+    setErrorFor(grade, "Grade should be greater than 0 and less than 10");
+  } else {
+    setSuccessFor(grade), update(grade);
+  }
+  if (city == "" || city.length < 2) {
+    setErrorFor(city, "City name should be greater than 2 alphabets");
+  } else {
+    setSuccessFor(city), update(city);
+  }
 
-  function validate(e) {
-    let target = e.target;
-    console.log(target);
-
-    if (target.id === "name") {
-      if (names == "" || names.length < 2) {
-        nameError.innerHTML = "Name should be greater than 2 alphabets";
-        target.classList.add("valid");
-        target.classList.remove("invalid");
-      }
-    }
-
-    {
-    }
-    if (schoolName == "" || schoolName.length < 2) {
-      schoolError.innerHTML = "School name should be greater than 2 alphabets";
-    } else if (grade == "" || grade < 0 || grade > 10) {
-      gradeError.innerHTML = "Grade should be greater than 0 and less than 10";
-    } else if (city == "" || city.length < 2) {
-      cityError.innerHTML = "City name should be greater than 2 alphabets";
-    } else {
-      tbody.innerHTML += `
+  function update() {
+    tbody.innerHTML += `
       <tr>
           <td>${names}</td>
           <td>${schoolName}</td>
@@ -56,15 +53,15 @@ function onAdd(e) {
           <td><button class="deleteBtn">Delete</button></td>
       </tr>
     `;
-    }
+
     form.reset();
-    function onDelete(e) {
-      if (!e.target.classList.contains("deleteBtn")) {
-        return;
-      }
-      const btn = e.target;
-      btn.closest("tr").remove();
-    }
-    table.addEventListener("click", onDelete);
   }
+  function onDelete(e) {
+    if (!e.target.classList.contains("deleteBtn")) {
+      return;
+    }
+    const btn = e.target;
+    btn.closest("tr").remove();
+  }
+  table.addEventListener("click", onDelete);
 }

@@ -41,15 +41,9 @@ form .input
     font-size: 15px;
     outline: none;
     width:100%;
+    border:2px solid #ece0e0;
 }
-form .input :valid
-{
-    background-color: rgb(45, 174, 45);
-}
-form .input :invalid
-{
-    background-color: rgb(200, 23, 23);
-}
+
 .input-field
 {
     font-weight: 600;
@@ -94,3 +88,35 @@ table {
   table th {
     border: solid 1px black;
   } 
+
+  .form-control
+  {
+    position: relative;
+  }
+  .form-control i
+  {
+    position: absolute;
+    top:15px;
+    right:10px;
+    visibility: hidden;
+  }
+  .form-control small
+  {
+    visibility: hidden;
+  }
+  .form-control.success input{
+    border-color: #2ecc71;
+  }
+  .form-control.error input{
+    border-color: #e74c3c
+  }
+.form-control.success i.fa-check-circle
+{
+    visibility: visible;
+    color: #2ecc71;
+}
+.form-control.error i.fa-exclamation-circle
+{
+    visibility: visible;
+    color: #e74c3c;
+}
