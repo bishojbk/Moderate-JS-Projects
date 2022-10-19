@@ -1,67 +1,89 @@
-function onAdd(e) {
-  const form = document.querySelector("form");
-  const table = document.querySelector("table");
-  const tbody = document.querySelector("tbody");
-  form.addEventListener("submit", onAdd);
+const form = document.getElementById("form");
+function Form() {
+  let smallName = document.getElementById("name-small");
+  let smallSchool = document.getElementById("school-small");
+  let smallGrade = document.getElementById("grade-small");
+  let smallCity = document.getElementById("city-small");
 
-  e.preventDefault();
+  let name = document.getElementById("name").value.trim();
+  let schoolName = document.getElementById("school-name").value.trim();
+  let grades = document.getElementById("grade").value.trim();
+  let cityName = document.getElementById("city").value.trim();
 
-  let names = document.getElementById("name").value.trim(),
-    grade = document.getElementById("grade").value.trim(),
-    city = document.getElementById("city").value.trim(),
-    schoolName = document.getElementById("school-name").value.trim();
-  let small = document.querySelector("small");
-  console.log(small);
-  console.log(names);
-  const formStyle = document.querySelector("form-control");
-  console.log(formStyle);
+  let nameColor = document.getElementById("name");
+  let schoolNameColor = document.getElementById("school-name");
+  let gradeColor = document.getElementById("grade");
+  let cityColor = document.getElementById("city");
 
-  function setErrorFor(input, message) {
-    small.innerText = message;
-    formStyle.classList.add("form-control.success input");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    validation();
+  });
+
+  function validation() {
+    validateName();
+    validateSchoolName();
+    validateGrade();
+    validateCityName();
   }
 
-  if (names == "" || names.length < 2) {
-    setErrorFor(names, "Names should be greater than 2 characters");
-  } else {
-    setSuccessFor(names), update(names);
-  }
-
-  if (schoolName == "" || schoolName.length < 2) {
-    setErrorFor(schoolName, "School name should be greater than 2 alphabets");
-  } else {
-    setSuccessFor(schoolName), update(schoolName);
-  }
-  if (grade == "" || grade < 0 || grade > 10) {
-    setErrorFor(grade, "Grade should be greater than 0 and less than 10");
-  } else {
-    setSuccessFor(grade), update(grade);
-  }
-  if (city == "" || city.length < 2) {
-    setErrorFor(city, "City name should be greater than 2 alphabets");
-  } else {
-    setSuccessFor(city), update(city);
-  }
-
-  function update() {
-    tbody.innerHTML += `
-      <tr>
-          <td>${names}</td>
-          <td>${schoolName}</td>
-          <td>${grade}</td>
-          <td>${city}</td>
-          <td><button class="deleteBtn">Delete</button></td>
-      </tr>
-    `;
-
-    form.reset();
-  }
-  function onDelete(e) {
-    if (!e.target.classList.contains("deleteBtn")) {
-      return;
+  function validateName() {
+    if (name.length < 3) {
+      smallName.innerHTML = "Username should be greater than 2 alphabets.";
+      nameColor.classList.remove("success");
+      nameColor.classList.add("error");
+      smallName.classList.add("error-small");
+      smallName.classList.remove("success-small");
+    } else {
+      nameColor.classList.add("success");
+      nameColor.classList.remove("error");
+      smallName.classList.remove("error-small");
+      smallName.classList.add("success-small");
     }
-    const btn = e.target;
-    btn.closest("tr").remove();
   }
-  table.addEventListener("click", onDelete);
+
+  function validateSchoolName() {
+    if (schoolName.length < 3) {
+      smallSchool.innerHTML = "School Name should be greater than 2 alphabets.";
+      schoolNameColor.classList.remove("success");
+      schoolNameColor.classList.add("error");
+      smallSchool.classList.add("error-small");
+      smallSchool.classList.remove("success-small");
+    } else {
+      schoolNameColor.classList.add("success");
+      schoolNameColor.classList.remove("error");
+      smallSchool.classList.add("success-small");
+    }
+  }
+  function validateGrade() {
+    if (grades <= 0 || grades > 10) {
+      smallGrade.innerHTML = "Grades should be between 1 and 10";
+      gradeColor.classList.remove("success");
+      gradeColor.classList.add("error");
+      smallGrade.classList.add("error-small");
+      smallGrade.classList.remove("success-small");
+    } else {
+      gradeColor.classList.add("success");
+      gradeColor.classList.remove("error");
+      smallGrade.classList.add("success-small");
+    }
+  }
+
+  function validateCityName() {
+    if (cityName.length < 3) {
+      smallCity.innerHTML = "City Name should be greater than 2 alphabets.";
+      cityColor.classList.remove("success");
+      cityColor.classList.add("error");
+      smallCity.classList.add("error-small");
+      smallCity.classList.remove("success-small");
+    } else {
+      cityColor.classList.add("success");
+      cityColor.classList.remove("error");
+      smallCity.classList.add("success-small");
+    }
+  }
+
+  document.querySelector("form").onsubmit = (e) => {
+    e.target.reset();
+  };
 }

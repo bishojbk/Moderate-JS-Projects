@@ -4,76 +4,38 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JavaScript Forms</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <title>Validation Form</title>
+    <link rel="stylesheet" href="../Forms-Table/style.css" />
   </head>
   <body>
-    <section class="container forms">
-      <div class="form">
+    <section class="container">
+      <div class="form" id="form">
         <header>JavaScript Forms</header>
         <form action="#">
-          <div class>Name:</div>
-          <div class="form-control">
-            <input type="text" placeholder="EJR" class="input" id="name" />
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-          </div>
+         <label for="name">Username:</label>
+            <input type="text" placeholder="EJR" id="name" class="input"> <br>
+          <small id="name-small" class=""></small> <br>
 
-          <div class="input-field">School Name:</div>
-          <div class="form-control error">
+         School Name:
             <input
               type="text"
               name=""
               id="school-name"
               placeholder="G.S. Niketan"
               class="input"
-            />
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-          </div>
-
-          <div class="input-field">Grade:</div>
-          <div class="form-control success">
-            <input type="number" placeholder="0" class="input" id="grade" />
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-          </div>
-
-          <div class="input-field">City:</div>
-          <div class="form-control">
-            <input type="text" placeholder="Hetauda" class="input" id="city" />
-            <i class="fa fa-check-circle"></i>
-            <i class="fa fa-exclamation-circle"></i>
-            <small>Error message</small>
-          </div>
-
-          <button class="button" onclick="onAdd()">Submit</button>
-        </form>
-      </div>
-
-      <section class="table-content">
-        <div class="table-fill">
-          <header>Table:</header>
-          <table>
-            <tr>
-              <th>Name:</th>
-              <th>School Name:</th>
-              <th>Grade:</th>
-              <th class="city">City:</th>
-              <th>Modify</th>
-            </tr>
-          </table>
-          <tbody></tbody>
-        </div>
-      </section>
-    </section>
+            /> <br>
+            <small id="school-small" class=""></small> <br>
+    
+          Grade:
+            <input type="number" placeholder="0" class="input" id="grade" /> <br>
+            <small id="grade-small" class=""></small>  <br>
+          
+          City:
+        
+            <input type="text" placeholder="Hetauda" class="input" id="city" /><br>
+            <small id="city-small" class=""></small> <br>
+           
+            <button type="submit" onclick="Form()">Submit</button> 
+            <script src="../Forms-Table/script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>
