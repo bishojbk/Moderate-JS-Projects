@@ -86,4 +86,32 @@ function Form() {
   document.querySelector("form").onsubmit = (e) => {
     e.target.reset();
   };
+
+  let table = document.querySelector("table");
+  const button = document.createElement("button");
+  button.classList.add("mouse");
+  if (
+    (name.length > 3 || name.length == 3) &&
+    (schoolName.length > 3 || schoolName.length == 3) &&
+    (cityName.length > 3 || cityName.length == 3) &&
+    ((grades > 0 && grades < 10) || grades == 10)
+  ) {
+    let template = `<tr>
+  <th> ${name}</th>
+  <th> ${schoolName}
+  <th> ${grades}
+  <th> ${cityName}
+  <th> <button class="deleteBtn" >Delete</button>
+  </th>`;
+    table.innerHTML += template;
+
+    function onDelete(e) {
+      if (!e.target.classList.contains("deleteBtn")) {
+        return;
+      }
+      const btn = e.target;
+      btn.closest("tr").remove();
+    }
+    table.addEventListener("click", onDelete);
+  }
 }
