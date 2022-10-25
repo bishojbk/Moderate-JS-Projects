@@ -9,14 +9,18 @@
 }
 .container 
 {
-    height: 80vh;
+    
+    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    position: relative;
     background-color: #4070f4;
 }
 .form
-{   
+{     
+    position: relative;
+    left: 60px;
+    font-weight: 700;
     padding:30px;
     border-radius: 6px;
     max-width:430px;
@@ -29,63 +33,64 @@ header
     font-weight: 300;
     color: black;
     text-align: center;
+    margin-bottom: 20px;
 }
-form{
-    margin-top: 25px;
-}
-form .input
+.form .input
 {
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: left;
-    font-size: 15px;
-    outline: none;
-    width:100%;
+  width: 100%;
+  padding: 10px 1px;
+  outline:none;
+  border-radius: 6px;
+  border: 1.9px solid black;
 }
-.input-field
+.form .error
 {
-    font-weight: 600;
+  border-color:red;
 }
-form button{
-    border-radius: 6px;
-    border: 1px solid #CACACA;
-    width:100%;
-    height: 50px;
-    font-weight: 600;
-    cursor: pointer;   
-}
-form button:hover
+.form .success
 {
-    background-color: orange;
+  border-color:green;
 }
-.table-content
+button
 {
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #4070f4;
+  padding:10px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  cursor: pointer;
+  width:100%;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
-.table-fill
+button:hover
 {
-    padding:30px;
-    padding-right: 2px;
-    border-radius: 6px;
-    max-width:600px;
-    width: 100%;
-    background-color: #FFF;
+  background-color: aqua;
 }
 
+.error-small{
+  color:red;
+}
+.success-small
+{
+  color:white;
+}
 
-table {
-    border-collapse: collapse;
-    text-align: center;
-    width: 95%;
-    
-  }
-
-  table td,
-  table th {
-    border: solid 1px black;
-   
-  } 
+.table
+{
+  position: relative;
+  left: 60px;
+  font-weight: 700;
+  padding:30px;
+  border-radius: 6px;
+  max-width:520px;
+  width: 100%;
+  background-color: #FFF;
+  left:300px;
+}
+table,th,td,tr
+{
+  border: 2px solid black;
+  border-collapse: collapse;
+  width:450px;
+  padding: 4px ;
+}

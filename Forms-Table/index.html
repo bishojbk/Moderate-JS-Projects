@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JavaScript Forms</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Validation Form</title>
+    <link rel="stylesheet" href="../Forms-Table/style.css" />
   </head>
   <body>
-    <section class="container forms">
-      <div class="form">
+    <section class="container">
+      <div class="form" id="form">
         <header>JavaScript Forms</header>
         <form action="#">
-          <div class="input-field">Name:</div>
-          <input type="text" placeholder="EJR" class="input" id="name" />
-          <div class="input-field">School Name:</div>
+          <label for="name">Name:</label>
+          <input type="text" placeholder="EJR" id="name" class="input" /> <br />
+          <small id="name-small" class=""></small> <br />
+
+          School Name:
           <input
             type="text"
             name=""
@@ -22,30 +24,44 @@
             placeholder="G.S. Niketan"
             class="input"
           />
-          <div class="input-field">Grade:</div>
-          <input type="number" placeholder="0" class="input" id="grade" />
-          <div class="input-field">City:</div>
-          <input type="text" placeholder="Hetauda" class="input" id="city" />
+          <br />
+          <small id="school-small" class=""></small> <br />
 
-          <button class="button" onclick="onAdd()">Submit</button>
+          Grade:
+          <input type="number" placeholder="0" class="input" id="grade" />
+          <br />
+          <small id="grade-small" class=""></small> <br />
+
+          City:
+
+          <input
+            type="text"
+            placeholder="Hetauda"
+            class="input"
+            id="city"
+          /><br />
+          <small id="city-small" class=""></small> <br />
+
+          <button type="submit" onclick="Form()">Submit</button>
+
+          <script src="../Forms-Table/script.js"></script>
         </form>
       </div>
-    </section>
-    <section class="table-content">
-      <div class="table-fill">
-        <header>Table:</header>
-        <table>
-          <tr>
-            <th>Name:</th>
-            <th>School Name:</th>
-            <th>Grade:</th>
-            <th class="city">City:</th>
-            <th>Modify</th>
-          </tr>
-        </table>
-        <tbody></tbody>
+
+      <div class="table">
+        <header>JavaScript Table</header>
+        <div>
+          <table>
+            <tr>
+              <th>Name:</th>
+              <th>School Name:</th>
+              <th>Grade:</th>
+              <th>City Name:</th>
+              <th>Modify</th>
+            </tr>
+          </table>
+        </div>
       </div>
     </section>
   </body>
-  <script src="script.js"></script>
 </html>
