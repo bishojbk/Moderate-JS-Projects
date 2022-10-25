@@ -94,3 +94,24 @@ table,th,td,tr
   width:450px;
   padding: 4px ;
 }
+.search
+{
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  left:105px;
+  height: 38px;
+  border: 1px solid black;
+  border-radius: 6px;
+} #fa
+{
+  position: relative;
+  left:76px;
+  cursor: pointer;
+}
+.filter
+{
+  position: relative;
+  max-width: 180px;
+  height:40px;
+}

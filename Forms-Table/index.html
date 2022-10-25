@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Validation Form</title>
     <link rel="stylesheet" href="../Forms-Table/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <section class="container">
       <div class="form" id="form">
         <header>JavaScript Forms</header>
+
         <form action="#">
           <label for="name">Name:</label>
           <input type="text" placeholder="EJR" id="name" class="input" /> <br />
@@ -42,14 +47,23 @@
           /><br />
           <small id="city-small" class=""></small> <br />
 
-          <button type="submit" onclick="Form()">Submit</button>
-
-          <script src="../Forms-Table/script.js"></script>
+          <button type="submit" class="submit" id="submit" onclick="Form()">
+            Submit
+          </button>
         </form>
       </div>
 
       <div class="table">
         <header>JavaScript Table</header>
+        <button class="filter">Filter by Class</button>
+        <input
+          type="text"
+          placeholder="Search.."
+          name="search"
+          class="search"
+          id="search"
+        />
+        <i class="fa fa-search" id="fa"></i>
         <div>
           <table>
             <tr>
@@ -63,5 +77,6 @@
         </div>
       </div>
     </section>
+    <script src="../Forms-Table/script.js"></script>
   </body>
 </html>
