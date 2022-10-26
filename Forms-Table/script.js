@@ -129,7 +129,7 @@ function Form() {
     let itemsTable = document.getElementById("table");
     let tr = itemsTable.getElementsByTagName("tr");
 
-    for (let i = 0; i < tr.length; i++) {
+    for (let i = 1; i < tr.length; i++) {
       let th0 = tr[i].getElementsByTagName("th")[0];
       if (th0) {
         txtValue = th0.textContent || th0.innerText;
@@ -139,6 +139,33 @@ function Form() {
           tr[i].style.display = "none";
         }
       }
+    }
+  }
+}
+function Filter() {
+  let dropdownValue = document.getElementById("dropdown").value;
+  dropdownValue = parseInt(dropdownValue);
+  if (dropdownValue == "0") {
+    return;
+  } else if (dropdownValue < 11) {
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+    for (let i = 1; i < tr.length; i++) {
+      let th2 = tr[i].getElementsByTagName("th")[2];
+      if (th2) {
+        txtValue = th2.textContent || th2.innerText;
+        if (txtValue == dropdownValue) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else {
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+    for (let i = 1; i < tr.length; i++) {
+      tr[i].style.display = "";
     }
   }
 }
