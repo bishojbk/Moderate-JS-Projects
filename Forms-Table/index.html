@@ -15,7 +15,8 @@
     <section class="container">
       <div class="form" id="form">
         <header>JavaScript Forms</header>
-
+        <div id="updating"></div>
+  
         <form action="#">
           <label for="name">Name:</label>
           <input type="text" placeholder="EJR" id="name" class="input" /> <br />
@@ -59,18 +60,18 @@
           <button class="filter">Filter by Grades</button>
           <div class="dropdown-content">
             <select id="dropdown" onclick="Filter()">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="11">Show all</option>
+              <option value="0" class="value">0</option>
+              <option value="1" class="value">1</option>
+              <option value="2" class="value">2</option>
+              <option value="3" class="value">3</option>
+              <option value="4" class="value">4</option>
+              <option value="5" class="value">5</option>
+              <option value="6" class="value">6</option>
+              <option value="7" class="value">7</option>
+              <option value="8" class="value">8</option>
+              <option value="9" class="value">9</option>
+              <option value="10" class="value">10</option>
+              <option value="11" class="value">Show all</option>
             </select>
           </div>
         </div>
@@ -84,6 +85,20 @@
         <i class="fa fa-search" id="fa"></i>
         <div>
           <table id="table">
+            <tr>
+              <th>Name:</th>
+              <th>School Name:</th>
+              <th>Grade:</th>
+              <th>City Name:</th>
+              <th style="width: 20%">Modify</th>
+            </tr>
+            <tr>
+              <th>Name:</th>
+              <th>School Name:</th>
+              <th>Grade:</th>
+              <th>City Name:</th>
+              <th>Modify</th>
+            </tr>
             <tr>
               <th>Name:</th>
               <th>School Name:</th>

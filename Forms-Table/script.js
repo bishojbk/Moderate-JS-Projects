@@ -1,4 +1,5 @@
 const form = document.getElementById("form");
+let button = document.getElementById("submit");
 
 function Form() {
   let smallName = document.getElementById("name-small");
@@ -7,6 +8,7 @@ function Form() {
   let smallCity = document.getElementById("city-small");
 
   let name = document.getElementById("name").value.trim();
+  console.log(name);
   let schoolName = document.getElementById("school-name").value.trim();
   let grades = document.getElementById("grade").value.trim();
   let cityName = document.getElementById("city").value.trim();
@@ -102,7 +104,7 @@ function Form() {
   <th> ${schoolName}
   <th> ${grades}
   <th> ${cityName}
-  <th> <button class="deleteBtn" >Delete</button>
+  <th>  <button class="editBtn" >Edit</button><button class="deleteBtn" >Delete</button>
   </th>`;
     table.innerHTML += template;
 
@@ -113,9 +115,64 @@ function Form() {
       const btn = e.target;
       btn.closest("tr").remove();
     }
-    table.addEventListener("click", onDelete);
-  }
+    function onEdit(e) {
+      if (!e.target.classList.contains("editBtn")) {
+        return;
+      }
+      for (let i = 1; i < table.rows.length; i++) {
+        table.rows[i].onclick = function () {
+          let rIndex = this.rowIndex;
+          name = this.cells[0].innerHTML;
+          schoolName = this.cells[1].innerHTML;
+          grades = this.cells[2].innerHTML;
+          cityName = this.cells[3].innerHTML;
+          console.log(name);
 
+          let submitButton = document.getElementById("submit");
+          let addForm = document.getElementById("form");
+          let msgUpdate = document.getElementById("updating");
+
+          if (submitButton.innerHTML == "Update") {
+            return;
+          }
+
+          submitButton.style.display = "none";
+          {
+            let formtemplate = `
+          <button class="update">Update</button>
+          <button class="cancel">Cancel</button>
+          `;
+            msgUpdate.innerHTML = "Updating the data.....";
+            submitButton.innerHTML = "Update";
+            addForm.innerHTML += formtemplate;
+          }
+          addForm.addEventListener("click", onUpdate);
+          addForm.addEventListener("click", onCancel);
+          function onUpdate(e) {
+            if (!e.target.classList.contains("update")) {
+              return;
+            } else {
+              let rIndex = this.rowIndex;
+              console.log(rIndex);
+              table.rows.rIndex.cells[0].innerHTML = name;
+              table.rows.rIndex.cells[1].innerHTML = schoolName;
+              table.rows.rIndex.cells[2].innerHTML = grades;
+              table.rows.rIndex.cells[3].innerHTML = cityName;
+            }
+          }
+
+          function onCancel(e) {
+            if (!e.target.classList.contains("cancel")) {
+              return;
+            } else {
+            }
+          }
+        };
+      }
+    }
+    table.addEventListener("click", onDelete);
+    table.addEventListener("click", onEdit);
+  }
   let search = document.getElementById("searcheditem");
   search.addEventListener("keypress", function (event) {
     if (event.keyCode === 13) {
