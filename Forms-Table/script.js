@@ -1,5 +1,6 @@
 const form = document.getElementById("form");
 let button = document.getElementById("submit");
+let rIndex = this.rowIndex;
 
 function Form() {
   let smallName = document.getElementById("name-small");
@@ -8,7 +9,6 @@ function Form() {
   let smallCity = document.getElementById("city-small");
 
   let name = document.getElementById("name").value.trim();
-  console.log(name);
   let schoolName = document.getElementById("school-name").value.trim();
   let grades = document.getElementById("grade").value.trim();
   let cityName = document.getElementById("city").value.trim();
@@ -104,7 +104,8 @@ function Form() {
   <th> ${schoolName}
   <th> ${grades}
   <th> ${cityName}
-  <th>  <button class="editBtn" >Edit</button><button class="deleteBtn" >Delete</button>
+  <th> <button class="editBtn" >Edit</button>
+  <button class="deleteBtn" >Delete</button>
   </th>`;
     table.innerHTML += template;
 
@@ -115,59 +116,97 @@ function Form() {
       const btn = e.target;
       btn.closest("tr").remove();
     }
+
     function onEdit(e) {
       if (!e.target.classList.contains("editBtn")) {
         return;
       }
-      for (let i = 1; i < table.rows.length; i++) {
-        table.rows[i].onclick = function () {
-          let rIndex = this.rowIndex;
-          name = this.cells[0].innerHTML;
-          schoolName = this.cells[1].innerHTML;
-          grades = this.cells[2].innerHTML;
-          cityName = this.cells[3].innerHTML;
-          console.log(name);
+      const edit = e.target;
+      let i = edit.closest("tr").rowIndex;
 
-          let submitButton = document.getElementById("submit");
-          let addForm = document.getElementById("form");
-          let msgUpdate = document.getElementById("updating");
+      let itemsTable = document.getElementById("table");
+      let tr = itemsTable.getElementsByTagName("tr");
 
-          if (submitButton.innerHTML == "Update") {
-            return;
-          }
+      let tesName, tesSchool, tesGrade, tesCity;
+      let th0 = tr[i].getElementsByTagName("th")[0];
+      if (th0) {
+        tesName = th0.textContent || th0.innerText;
+      }
+      let th1 = tr[i].getElementsByTagName("th")[1];
+      if (th1) {
+        tesSchool = th1.textContent || th1.innerText;
+      }
+      let th2 = tr[i].getElementsByTagName("th")[2];
+      if (th2) {
+        tesGrade = th2.textContent || th2.innerText;
+      }
+      let th3 = tr[i].getElementsByTagName("th")[3];
+      if (th3) {
+        tesCity = th3.textContent || th3.innerText;
+      }
 
-          submitButton.style.display = "none";
-          {
-            let formtemplate = `
+      let submitButton = document.getElementById("submit");
+      let addForm = document.getElementById("form");
+      let msgUpdate = document.getElementById("updating");
+
+      if (submitButton.innerHTML == "Update") {
+        return;
+      }
+
+      submitButton.style.display = "none";
+      {
+        let formtemplate = `
           <button class="update">Update</button>
           <button class="cancel">Cancel</button>
           `;
-            msgUpdate.innerHTML = "Updating the data.....";
-            submitButton.innerHTML = "Update";
-            addForm.innerHTML += formtemplate;
-          }
-          addForm.addEventListener("click", onUpdate);
-          addForm.addEventListener("click", onCancel);
-          function onUpdate(e) {
-            if (!e.target.classList.contains("update")) {
-              return;
-            } else {
-              let rIndex = this.rowIndex;
-              console.log(rIndex);
-              table.rows.rIndex.cells[0].innerHTML = name;
-              table.rows.rIndex.cells[1].innerHTML = schoolName;
-              table.rows.rIndex.cells[2].innerHTML = grades;
-              table.rows.rIndex.cells[3].innerHTML = cityName;
-            }
-          }
+        msgUpdate.innerHTML = "Updating the data.....";
+        submitButton.innerHTML = "Update";
+        addForm.innerHTML += formtemplate;
+      }
+      addForm.addEventListener("click", onUpdate);
+      addForm.addEventListener("click", onCancel);
 
-          function onCancel(e) {
-            if (!e.target.classList.contains("cancel")) {
-              return;
-            } else {
-            }
+      function onUpdate(e) {
+        if (!e.target.classList.contains("update")) {
+          return;
+        } else {
+          let newName = document.getElementById("name").value.trim();
+          let newSchoolName = document
+            .getElementById("school-name")
+            .value.trim();
+          let newGrade = document.getElementById("grade").value.trim();
+          let newCity = document.getElementById("city").value.trim();
+
+          // if (
+          //   (newName.length > 3 || newName.length == 3) &&
+          //   (newSchoolName.length > 3 || newSchoolName.length == 3) &&
+          //   (newCity.length > 3 || newCity.length == 3) &&
+          //   ((newGrade > 0 && newGrade < 10) || newGrade == 10)
+          // )
+          {
+            let itemsTable = document.getElementById("table");
+            let tr = itemsTable.getElementsByTagName("tr");
+
+            let th0 = tr[i].getElementsByTagName("th")[0];
+            th0.textContent = newName;
+
+            let th1 = tr[i].getElementsByTagName("th")[1];
+            th1.textContent = newSchoolName;
+
+            let th2 = tr[i].getElementsByTagName("th")[2];
+            th2.textContent = newGrade;
+
+            let th3 = tr[i].getElementsByTagName("th")[3];
+            th3.textContent = newCity;
           }
-        };
+        }
+      }
+
+      function onCancel(e) {
+        if (!e.target.classList.contains("cancel")) {
+          return;
+        } else {
+        }
       }
     }
     table.addEventListener("click", onDelete);
@@ -190,6 +229,7 @@ function Form() {
       let th0 = tr[i].getElementsByTagName("th")[0];
       if (th0) {
         txtValue = th0.textContent || th0.innerText;
+        console.log(txtValue);
         if (txtValue.toUpperCase().indexOf(upperCase) > -1) {
           tr[i].style.display = "";
         } else {
