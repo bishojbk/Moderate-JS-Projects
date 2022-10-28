@@ -190,13 +190,12 @@ function Form() {
           let newGrade = document.getElementById("grade").value.trim();
           let newCity = document.getElementById("city").value.trim();
 
-          // if (
-          //   (newName.length > 3 || newName.length == 3) &&
-          //   (newSchoolName.length > 3 || newSchoolName.length == 3) &&
-          //   (newCity.length > 3 || newCity.length == 3) &&
-          //   ((newGrade > 0 && newGrade < 10) || newGrade == 10)
-          // )
-          {
+          if (
+            (newName.length > 3 || newName.length == 3) &&
+            (newSchoolName.length > 3 || newSchoolName.length == 3) &&
+            (newCity.length > 3 || newCity.length == 3) &&
+            ((newGrade > 0 && newGrade < 10) || newGrade == 10)
+          ) {
             let itemsTable = document.getElementById("table");
             let tr = itemsTable.getElementsByTagName("tr");
 
