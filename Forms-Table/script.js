@@ -1,6 +1,9 @@
 const form = document.getElementById("form");
 let button = document.getElementById("submit");
 let rIndex = this.rowIndex;
+let rowNumber, reset;
+let editButtonCount = 1;
+let cancelButtonCount = 1;
 
 function Form() {
   let smallName = document.getElementById("name-small");
@@ -8,7 +11,7 @@ function Form() {
   let smallGrade = document.getElementById("grade-small");
   let smallCity = document.getElementById("city-small");
 
-  let name = document.getElementById("name").value.trim();
+  let name1 = document.getElementById("name").value.trim();
   let schoolName = document.getElementById("school-name").value.trim();
   let grades = document.getElementById("grade").value.trim();
   let cityName = document.getElementById("city").value.trim();
@@ -17,7 +20,6 @@ function Form() {
   let schoolNameColor = document.getElementById("school-name");
   let gradeColor = document.getElementById("grade");
   let cityColor = document.getElementById("city");
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     validation();
@@ -31,7 +33,7 @@ function Form() {
   }
 
   function validateName() {
-    if (name.length < 3) {
+    if (name1.length < 3) {
       smallName.innerHTML = "Username should be greater than 2 alphabets.";
       nameColor.classList.remove("success");
       nameColor.classList.add("error");
@@ -87,20 +89,21 @@ function Form() {
   }
 
   document.querySelector("form").onsubmit = (e) => {
-    e.target.reset();
+    reset = e.target.reset();
+    reset;
   };
 
   let table = document.querySelector("table");
   const button = document.createElement("button");
   button.classList.add("mouse");
   if (
-    (name.length > 3 || name.length == 3) &&
+    (name1.length > 3 || name1.length == 3) &&
     (schoolName.length > 3 || schoolName.length == 3) &&
     (cityName.length > 3 || cityName.length == 3) &&
     ((grades > 0 && grades < 10) || grades == 10)
   ) {
     let template = `<tr>
-  <th> ${name}</th>
+  <th> ${name1}</th>
   <th> ${schoolName}
   <th> ${grades}
   <th> ${cityName}
@@ -123,6 +126,7 @@ function Form() {
       }
       const edit = e.target;
       let i = edit.closest("tr").rowIndex;
+      rowNumber = i;
 
       let itemsTable = document.getElementById("table");
       let tr = itemsTable.getElementsByTagName("tr");
@@ -145,24 +149,33 @@ function Form() {
         tesCity = th3.textContent || th3.innerText;
       }
 
+      let formSchoolName = document.getElementById("school-name").value.trim();
+      let formGrades = document.getElementById("grade").value.trim();
+      let formCityName = document.getElementById("city").value.trim();
+
+      // name.innerText = tesName;
+      // console.log(formName);
+      // schoolName.innerHTML = tesSchool;
+      // grades.innerHTML = tesGrade;
+      // cityName.innerHTML = tesCity;
+
       let submitButton = document.getElementById("submit");
       let addForm = document.getElementById("form");
       let msgUpdate = document.getElementById("updating");
 
-      if (submitButton.innerHTML == "Update") {
-        return;
-      }
-
       submitButton.style.display = "none";
       {
         let formtemplate = `
-          <button class="update">Update</button>
-          <button class="cancel">Cancel</button>
+          <button class="update" id="update">Update</button>
+          <button class="cancel" id="cancel">Cancel</button>
           `;
         msgUpdate.innerHTML = "Updating the data.....";
-        submitButton.innerHTML = "Update";
-        addForm.innerHTML += formtemplate;
+        if (editButtonCount == 1) {
+          addForm.innerHTML += formtemplate;
+        }
+        editButtonCount += 1;
       }
+
       addForm.addEventListener("click", onUpdate);
       addForm.addEventListener("click", onCancel);
 
@@ -187,16 +200,17 @@ function Form() {
             let itemsTable = document.getElementById("table");
             let tr = itemsTable.getElementsByTagName("tr");
 
-            let th0 = tr[i].getElementsByTagName("th")[0];
+            let th0 = tr[rowNumber].getElementsByTagName("th")[0];
+
             th0.textContent = newName;
 
-            let th1 = tr[i].getElementsByTagName("th")[1];
+            let th1 = tr[rowNumber].getElementsByTagName("th")[1];
             th1.textContent = newSchoolName;
 
-            let th2 = tr[i].getElementsByTagName("th")[2];
+            let th2 = tr[rowNumber].getElementsByTagName("th")[2];
             th2.textContent = newGrade;
 
-            let th3 = tr[i].getElementsByTagName("th")[3];
+            let th3 = tr[rowNumber].getElementsByTagName("th")[3];
             th3.textContent = newCity;
           }
         }
@@ -206,12 +220,34 @@ function Form() {
         if (!e.target.classList.contains("cancel")) {
           return;
         } else {
+          editButtonCount = editButtonCount - 1;
+          document.getElementById("cancel").style.display = "none";
+          document.getElementById("update").style.display = "none";
+
+          let submitButton = document.getElementById("submit");
+          submitButton.style.display = "block";
+
+          let itemsTable = document.getElementById("table");
+          let tr = itemsTable.getElementsByTagName("tr");
+
+          let th0 = tr[rowNumber].getElementsByTagName("th")[0];
+          th0.textContent = th0.innerHTML;
+
+          let th1 = tr[rowNumber].getElementsByTagName("th")[1];
+          th1.textContent = th1.innerHTML;
+
+          let th2 = tr[rowNumber].getElementsByTagName("th")[2];
+          th2.textContent = th2.innerHTML;
+
+          let th3 = tr[rowNumber].getElementsByTagName("th")[3];
+          th3.textContent = th3.innerHTML;
         }
       }
     }
     table.addEventListener("click", onDelete);
     table.addEventListener("click", onEdit);
   }
+
   let search = document.getElementById("searcheditem");
   search.addEventListener("keypress", function (event) {
     if (event.keyCode === 13) {
