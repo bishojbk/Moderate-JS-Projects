@@ -1,4 +1,5 @@
 const form = document.getElementById("form");
+
 function Form() {
   let smallName = document.getElementById("name-small");
   let smallSchool = document.getElementById("school-small");
@@ -113,5 +114,58 @@ function Form() {
       btn.closest("tr").remove();
     }
     table.addEventListener("click", onDelete);
+  }
+
+  let search = document.getElementById("searcheditem");
+  search.addEventListener("keypress", function (event) {
+    if (event.keyCode === 13) {
+      searchedItem();
+    }
+  });
+  function searchedItem() {
+    let searchedItem = document.getElementById("searcheditem").value;
+    let upperCase = searchedItem.toUpperCase();
+
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+
+    for (let i = 1; i < tr.length; i++) {
+      let th0 = tr[i].getElementsByTagName("th")[0];
+      if (th0) {
+        txtValue = th0.textContent || th0.innerText;
+        if (txtValue.toUpperCase().indexOf(upperCase) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+}
+function Filter() {
+  let dropdownValue = document.getElementById("dropdown").value;
+  dropdownValue = parseInt(dropdownValue);
+  if (dropdownValue == "0") {
+    return;
+  } else if (dropdownValue < 11) {
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+    for (let i = 1; i < tr.length; i++) {
+      let th2 = tr[i].getElementsByTagName("th")[2];
+      if (th2) {
+        txtValue = th2.textContent || th2.innerText;
+        if (txtValue == dropdownValue) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  } else {
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+    for (let i = 1; i < tr.length; i++) {
+      tr[i].style.display = "";
+    }
   }
 }

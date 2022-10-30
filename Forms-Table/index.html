@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Validation Form</title>
     <link rel="stylesheet" href="../Forms-Table/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <section class="container">
       <div class="form" id="form">
         <header>JavaScript Forms</header>
+
         <form action="#">
           <label for="name">Name:</label>
           <input type="text" placeholder="EJR" id="name" class="input" /> <br />
@@ -42,16 +47,43 @@
           /><br />
           <small id="city-small" class=""></small> <br />
 
-          <button type="submit" onclick="Form()">Submit</button>
-
-          <script src="../Forms-Table/script.js"></script>
+          <button type="submit" class="submit" id="submit" onclick="Form()">
+            Submit
+          </button>
         </form>
       </div>
 
       <div class="table">
         <header>JavaScript Table</header>
+        <div class="dropdown">
+          <button class="filter">Filter by Grades</button>
+          <div class="dropdown-content">
+            <select id="dropdown" onclick="Filter()">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">Show all</option>
+            </select>
+          </div>
+        </div>
+        <input
+          type="text"
+          placeholder="Search by name"
+          name="search"
+          class="search"
+          id="searcheditem"
+        />
+        <i class="fa fa-search" id="fa"></i>
         <div>
-          <table>
+          <table id="table">
             <tr>
               <th>Name:</th>
               <th>School Name:</th>
@@ -63,5 +95,6 @@
         </div>
       </div>
     </section>
+    <script src="../Forms-Table/script.js"></script>
   </body>
 </html>
