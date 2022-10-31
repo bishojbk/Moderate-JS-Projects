@@ -112,6 +112,9 @@ function Form() {
   </th>`;
     table.innerHTML += template;
 
+    table.addEventListener("click", onDelete);
+    table.addEventListener("click", onEdit);
+
     function onDelete(e) {
       if (!e.target.classList.contains("deleteBtn")) {
         return;
@@ -136,6 +139,7 @@ function Form() {
       if (th0) {
         tesName = th0.textContent || th0.innerText;
       }
+
       let th1 = tr[i].getElementsByTagName("th")[1];
       if (th1) {
         tesSchool = th1.textContent || th1.innerText;
@@ -148,16 +152,15 @@ function Form() {
       if (th3) {
         tesCity = th3.textContent || th3.innerText;
       }
+      let formName = document.getElementById("name");
+      let formSchoolName = document.getElementById("school-name");
+      let formGrades = document.getElementById("grade");
+      let formCityName = document.getElementById("city");
 
-      let formSchoolName = document.getElementById("school-name").value.trim();
-      let formGrades = document.getElementById("grade").value.trim();
-      let formCityName = document.getElementById("city").value.trim();
-
-      // name.innerText = tesName;
-      // console.log(formName);
-      // schoolName.innerHTML = tesSchool;
-      // grades.innerHTML = tesGrade;
-      // cityName.innerHTML = tesCity;
+      formName.value = tesName.trim();
+      formSchoolName.value = tesSchool.trim();
+      formGrades.value = tesGrade.trim();
+      formCityName.value = tesCity.trim();
 
       let submitButton = document.getElementById("submit");
       let addForm = document.getElementById("form");
@@ -240,11 +243,11 @@ function Form() {
 
           let th3 = tr[rowNumber].getElementsByTagName("th")[3];
           th3.textContent = th3.innerHTML;
+
+          msgUpdate.innerHTML = "";
         }
       }
     }
-    table.addEventListener("click", onDelete);
-    table.addEventListener("click", onEdit);
   }
 
   let search = document.getElementById("searcheditem");
