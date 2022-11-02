@@ -65,7 +65,13 @@ button
 button:hover
 {
   background-color: aqua;
+ 
 }
+.submit
+{
+  display: none;
+}
+
 
 .error-small{
   color:red;

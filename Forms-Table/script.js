@@ -2,8 +2,7 @@ const form = document.getElementById("form");
 let button = document.getElementById("submit");
 let rIndex = this.rowIndex;
 let rowNumber, reset;
-let editButtonCount = 1;
-let cancelButtonCount = 1;
+let msgUpdate = document.getElementById("updating");
 
 function Form() {
   let smallName = document.getElementById("name-small");
@@ -163,90 +162,15 @@ function Form() {
       formCityName.value = tesCity.trim();
 
       let submitButton = document.getElementById("submit");
-      let addForm = document.getElementById("form");
-      let msgUpdate = document.getElementById("updating");
+
+      let update = document.getElementById("update");
+      let cancel = document.getElementById("cancel");
 
       submitButton.style.display = "none";
-      {
-        let formtemplate = `
-          <button class="update" id="update">Update</button>
-          <button class="cancel" id="cancel">Cancel</button>
-          `;
-        msgUpdate.innerHTML = "Updating the data.....";
-        if (editButtonCount == 1) {
-          addForm.innerHTML += formtemplate;
-        }
-        editButtonCount += 1;
-      }
 
-      addForm.addEventListener("click", onUpdate);
-      addForm.addEventListener("click", onCancel);
-
-      function onUpdate(e) {
-        if (!e.target.classList.contains("update")) {
-          return;
-        } else {
-          let newName = document.getElementById("name").value.trim();
-          let newSchoolName = document
-            .getElementById("school-name")
-            .value.trim();
-          let newGrade = document.getElementById("grade").value.trim();
-          let newCity = document.getElementById("city").value.trim();
-
-          if (
-            (newName.length > 3 || newName.length == 3) &&
-            (newSchoolName.length > 3 || newSchoolName.length == 3) &&
-            (newCity.length > 3 || newCity.length == 3) &&
-            ((newGrade > 0 && newGrade < 10) || newGrade == 10)
-          ) {
-            let itemsTable = document.getElementById("table");
-            let tr = itemsTable.getElementsByTagName("tr");
-
-            let th0 = tr[rowNumber].getElementsByTagName("th")[0];
-
-            th0.textContent = newName;
-
-            let th1 = tr[rowNumber].getElementsByTagName("th")[1];
-            th1.textContent = newSchoolName;
-
-            let th2 = tr[rowNumber].getElementsByTagName("th")[2];
-            th2.textContent = newGrade;
-
-            let th3 = tr[rowNumber].getElementsByTagName("th")[3];
-            th3.textContent = newCity;
-          }
-        }
-      }
-
-      function onCancel(e) {
-        if (!e.target.classList.contains("cancel")) {
-          return;
-        } else {
-          editButtonCount = editButtonCount - 1;
-          document.getElementById("cancel").style.display = "none";
-          document.getElementById("update").style.display = "none";
-
-          let submitButton = document.getElementById("submit");
-          submitButton.style.display = "block";
-
-          let itemsTable = document.getElementById("table");
-          let tr = itemsTable.getElementsByTagName("tr");
-
-          let th0 = tr[rowNumber].getElementsByTagName("th")[0];
-          th0.textContent = th0.innerHTML;
-
-          let th1 = tr[rowNumber].getElementsByTagName("th")[1];
-          th1.textContent = th1.innerHTML;
-
-          let th2 = tr[rowNumber].getElementsByTagName("th")[2];
-          th2.textContent = th2.innerHTML;
-
-          let th3 = tr[rowNumber].getElementsByTagName("th")[3];
-          th3.textContent = th3.innerHTML;
-
-          msgUpdate.innerHTML = "";
-        }
-      }
+      msgUpdate.innerHTML = "Updating the data.....";
+      cancel.style.display = "block";
+      update.style.display = "block";
     }
   }
 
@@ -276,6 +200,60 @@ function Form() {
       }
     }
   }
+}
+function onUpdate(e) {
+  let newName = document.getElementById("name").value.trim();
+  let newSchoolName = document.getElementById("school-name").value.trim();
+  let newGrade = document.getElementById("grade").value.trim();
+  let newCity = document.getElementById("city").value.trim();
+
+  if (
+    (newName.length > 3 || newName.length == 3) &&
+    (newSchoolName.length > 3 || newSchoolName.length == 3) &&
+    (newCity.length > 3 || newCity.length == 3) &&
+    ((newGrade > 0 && newGrade < 10) || newGrade == 10)
+  ) {
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+
+    let th0 = tr[rowNumber].getElementsByTagName("th")[0];
+
+    th0.textContent = newName;
+
+    let th1 = tr[rowNumber].getElementsByTagName("th")[1];
+    th1.textContent = newSchoolName;
+
+    let th2 = tr[rowNumber].getElementsByTagName("th")[2];
+    th2.textContent = newGrade;
+
+    let th3 = tr[rowNumber].getElementsByTagName("th")[3];
+    th3.textContent = newCity;
+  }
+}
+
+function onCancel(e) {
+  document.getElementById("cancel").style.display = "none";
+  document.getElementById("update").style.display = "none";
+
+  let submitButton = document.getElementById("submit");
+  submitButton.style.display = "block";
+
+  let itemsTable = document.getElementById("table");
+  let tr = itemsTable.getElementsByTagName("tr");
+
+  let th0 = tr[rowNumber].getElementsByTagName("th")[0];
+  th0.textContent = th0.innerHTML;
+
+  let th1 = tr[rowNumber].getElementsByTagName("th")[1];
+  th1.textContent = th1.innerHTML;
+
+  let th2 = tr[rowNumber].getElementsByTagName("th")[2];
+  th2.textContent = th2.innerHTML;
+
+  let th3 = tr[rowNumber].getElementsByTagName("th")[3];
+  th3.textContent = th3.innerHTML;
+
+  msgUpdate.innerHTML = "";
 }
 function Filter() {
   let dropdownValue = document.getElementById("dropdown").value;
