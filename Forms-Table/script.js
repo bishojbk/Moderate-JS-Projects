@@ -1,4 +1,8 @@
 const form = document.getElementById("form");
+let button = document.getElementById("submit");
+let rIndex = this.rowIndex;
+let rowNumber, reset;
+let msgUpdate = document.getElementById("updating");
 
 function Form() {
   let smallName = document.getElementById("name-small");
@@ -6,7 +10,7 @@ function Form() {
   let smallGrade = document.getElementById("grade-small");
   let smallCity = document.getElementById("city-small");
 
-  let name = document.getElementById("name").value.trim();
+  let name1 = document.getElementById("name").value.trim();
   let schoolName = document.getElementById("school-name").value.trim();
   let grades = document.getElementById("grade").value.trim();
   let cityName = document.getElementById("city").value.trim();
@@ -15,7 +19,6 @@ function Form() {
   let schoolNameColor = document.getElementById("school-name");
   let gradeColor = document.getElementById("grade");
   let cityColor = document.getElementById("city");
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     validation();
@@ -29,7 +32,7 @@ function Form() {
   }
 
   function validateName() {
-    if (name.length < 3) {
+    if (name1.length < 3) {
       smallName.innerHTML = "Username should be greater than 2 alphabets.";
       nameColor.classList.remove("success");
       nameColor.classList.add("error");
@@ -85,26 +88,31 @@ function Form() {
   }
 
   document.querySelector("form").onsubmit = (e) => {
-    e.target.reset();
+    reset = e.target.reset();
+    reset;
   };
 
   let table = document.querySelector("table");
   const button = document.createElement("button");
   button.classList.add("mouse");
   if (
-    (name.length > 3 || name.length == 3) &&
+    (name1.length > 3 || name1.length == 3) &&
     (schoolName.length > 3 || schoolName.length == 3) &&
     (cityName.length > 3 || cityName.length == 3) &&
     ((grades > 0 && grades < 10) || grades == 10)
   ) {
     let template = `<tr>
-  <th> ${name}</th>
+  <th> ${name1}</th>
   <th> ${schoolName}
   <th> ${grades}
   <th> ${cityName}
-  <th> <button class="deleteBtn" >Delete</button>
+  <th> <button class="editBtn" >Edit</button>
+  <button class="deleteBtn" >Delete</button>
   </th>`;
     table.innerHTML += template;
+
+    table.addEventListener("click", onDelete);
+    table.addEventListener("click", onEdit);
 
     function onDelete(e) {
       if (!e.target.classList.contains("deleteBtn")) {
@@ -113,7 +121,57 @@ function Form() {
       const btn = e.target;
       btn.closest("tr").remove();
     }
-    table.addEventListener("click", onDelete);
+
+    function onEdit(e) {
+      if (!e.target.classList.contains("editBtn")) {
+        return;
+      }
+      const edit = e.target;
+      let i = edit.closest("tr").rowIndex;
+      rowNumber = i;
+
+      let itemsTable = document.getElementById("table");
+      let tr = itemsTable.getElementsByTagName("tr");
+
+      let tesName, tesSchool, tesGrade, tesCity;
+      let th0 = tr[i].getElementsByTagName("th")[0];
+      if (th0) {
+        tesName = th0.textContent || th0.innerText;
+      }
+
+      let th1 = tr[i].getElementsByTagName("th")[1];
+      if (th1) {
+        tesSchool = th1.textContent || th1.innerText;
+      }
+      let th2 = tr[i].getElementsByTagName("th")[2];
+      if (th2) {
+        tesGrade = th2.textContent || th2.innerText;
+      }
+      let th3 = tr[i].getElementsByTagName("th")[3];
+      if (th3) {
+        tesCity = th3.textContent || th3.innerText;
+      }
+      let formName = document.getElementById("name");
+      let formSchoolName = document.getElementById("school-name");
+      let formGrades = document.getElementById("grade");
+      let formCityName = document.getElementById("city");
+
+      formName.value = tesName.trim();
+      formSchoolName.value = tesSchool.trim();
+      formGrades.value = tesGrade.trim();
+      formCityName.value = tesCity.trim();
+
+      let submitButton = document.getElementById("submit");
+
+      let update = document.getElementById("update");
+      let cancel = document.getElementById("cancel");
+
+      submitButton.style.display = "none";
+
+      msgUpdate.innerHTML = "Updating the data.....";
+      cancel.style.display = "block";
+      update.style.display = "block";
+    }
   }
 
   let search = document.getElementById("searcheditem");
@@ -133,6 +191,7 @@ function Form() {
       let th0 = tr[i].getElementsByTagName("th")[0];
       if (th0) {
         txtValue = th0.textContent || th0.innerText;
+        console.log(txtValue);
         if (txtValue.toUpperCase().indexOf(upperCase) > -1) {
           tr[i].style.display = "";
         } else {
@@ -141,6 +200,60 @@ function Form() {
       }
     }
   }
+}
+function onUpdate(e) {
+  let newName = document.getElementById("name").value.trim();
+  let newSchoolName = document.getElementById("school-name").value.trim();
+  let newGrade = document.getElementById("grade").value.trim();
+  let newCity = document.getElementById("city").value.trim();
+
+  if (
+    (newName.length > 3 || newName.length == 3) &&
+    (newSchoolName.length > 3 || newSchoolName.length == 3) &&
+    (newCity.length > 3 || newCity.length == 3) &&
+    ((newGrade > 0 && newGrade < 10) || newGrade == 10)
+  ) {
+    let itemsTable = document.getElementById("table");
+    let tr = itemsTable.getElementsByTagName("tr");
+
+    let th0 = tr[rowNumber].getElementsByTagName("th")[0];
+
+    th0.textContent = newName;
+
+    let th1 = tr[rowNumber].getElementsByTagName("th")[1];
+    th1.textContent = newSchoolName;
+
+    let th2 = tr[rowNumber].getElementsByTagName("th")[2];
+    th2.textContent = newGrade;
+
+    let th3 = tr[rowNumber].getElementsByTagName("th")[3];
+    th3.textContent = newCity;
+  }
+}
+
+function onCancel(e) {
+  document.getElementById("cancel").style.display = "none";
+  document.getElementById("update").style.display = "none";
+
+  let submitButton = document.getElementById("submit");
+  submitButton.style.display = "block";
+
+  let itemsTable = document.getElementById("table");
+  let tr = itemsTable.getElementsByTagName("tr");
+
+  let th0 = tr[rowNumber].getElementsByTagName("th")[0];
+  th0.textContent = th0.innerHTML;
+
+  let th1 = tr[rowNumber].getElementsByTagName("th")[1];
+  th1.textContent = th1.innerHTML;
+
+  let th2 = tr[rowNumber].getElementsByTagName("th")[2];
+  th2.textContent = th2.innerHTML;
+
+  let th3 = tr[rowNumber].getElementsByTagName("th")[3];
+  th3.textContent = th3.innerHTML;
+
+  msgUpdate.innerHTML = "";
 }
 function Filter() {
   let dropdownValue = document.getElementById("dropdown").value;
